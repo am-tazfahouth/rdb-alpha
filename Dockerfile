@@ -6,6 +6,9 @@ ARG HOMEDIR=/workspace/project
 ENV TZ="America/New_York" \
   LOCALE=en_US.UTF-8
 
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://azure.archive.ubuntu.com/ubuntu/|g' /etc/apt/sources.list \
+    && sed -i 's|http://security.ubuntu.com/ubuntu/|http://azure.archive.ubuntu.com/ubuntu/|g' /etc/apt/sources.list
+
 RUN apt update && apt install -y sudo
 RUN yes | unminimize
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
